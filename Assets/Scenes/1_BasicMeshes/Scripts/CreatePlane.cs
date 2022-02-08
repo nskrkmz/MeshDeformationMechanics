@@ -6,9 +6,9 @@ using UnityEngine;
     typeof(MeshRenderer),
     typeof(MeshFilter)
     )]
-public class CreateCube : MonoBehaviour, IMeshCreatable
-{ 
-    [SerializeField] Material mat;
+public class CreatePlane : MonoBehaviour, IMeshCreatable
+{
+    [SerializeField] private Material mat;
     Vector3[] vertices;
     int[] triangles;
 
@@ -27,29 +27,14 @@ public class CreateCube : MonoBehaviour, IMeshCreatable
     public void CreateMeshData()
     {
         vertices = new Vector3[]{
-            new Vector3(0,0,0),
-            new Vector3(0,1,0),
-            new Vector3(1,0,0),
-            new Vector3(1,1,0),
-            new Vector3(1,0,1),
-            new Vector3(1,1,1),
-            new Vector3(0,0,1),
-            new Vector3(0,1,1),
+            Vector3.zero,                       //0,0,0
+            Vector3.forward,                    //0,0,1
+            Vector3.right,                      //1,0,0
+            Vector3.right + Vector3.forward     //1,0,1
         };
 
         triangles = new int[]{
-            0,1,2,
-            1,3,2,
-            2,3,4,
-            3,5,4,
-            4,5,6,
-            5,7,6,
-            6,7,0,
-            7,1,0,
-            5,3,7,
-            3,1,7,
-            0,6,2,
-            6,4,2
+            0,1,2,1,3,2
         };
     }
 
@@ -61,4 +46,5 @@ public class CreateCube : MonoBehaviour, IMeshCreatable
 
         mesh.RecalculateNormals();
     }
+
 }
